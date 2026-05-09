@@ -39,7 +39,7 @@ while True:
 
         if not question_ids:
             print("No more questions available for this difficulty level.")
-            option = input("Do you want to reset question bank for this difficulty? (y/n): ").lower().strip()
+            option = input("Do you want to reset question bank? (y/n): ").lower().strip()
             if option == 'y':
                 questions_done.clear()
             break

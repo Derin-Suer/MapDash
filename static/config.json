@@ -1,0 +1,10 @@
+{
+    "questionsPerRound": 10,
+    "endpoints": {
+        "state": "/api/state",
+        "start": "/api/start",
+        "question": "/api/question",
+        "answer": "/api/answer",
+        "resetBank": "/api/reset_bank"
+    }
+}
