@@ -20,10 +20,11 @@ high_score = 0
 print("Welcome to MapDash Quiz Game!")
 print("Test your knowledge with questions from various categories and difficulty levels.")
 print("FYI: write your answer out in letters, not numbers. For example, write 'twenty' instead of '20'. Unless stated otherwise\n")
+questions_done = [] #all questions that have been asked in the current session
+
 while True:
     score = 0
-    questions_done = [] #all questions that have been asked in the current session
-
+    
     #DIFFICULTY SELECTION
     while True:
         difficulty = input("Select difficulty (e, m, d): ").lower().strip()
@@ -38,14 +39,18 @@ while True:
 
         if not question_ids:
             print("No more questions available for this difficulty level.")
+            option = input("Do you want to reset question bank for this difficulty? (y/n): ").lower().strip()
+            if option == 'y':
+                questions_done.clear()
             break
         question_id = random.choice(question_ids)
         questions_done.append(question_id)
 
         cursor.execute("SELECT question, answer FROM questions WHERE id = ?", (question_id,))
         question, answer = cursor.fetchone()
+        answers = answer.split("|")
         user_answer = input(f"{question} ").strip().lower()
-        if user_answer == answer.lower():
+        if user_answer in [a.strip().lower() for a in answers]:
             print("Correct!")
             score += 1
         else:
@@ -55,6 +60,8 @@ while True:
         high_score = score
     print(f"Your score: {score}")
     print(f"High score: {high_score}")
+
+    print()
 
     play_again = input("Do you want to play again? (y/n): ").lower().strip()
     if play_again != 'y':
