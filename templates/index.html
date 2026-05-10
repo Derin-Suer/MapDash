@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapDash Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+
+<body>
+
+    <header>
+        <span class="compass-rose">✦</span>
+        <h1>Map<span>Dash</span></h1>
+        <p class="tagline">Geography, History &amp; Knowledge Quiz</p>
+    </header>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+        <div class="score-box">
+            <span class="score-label">Score</span>
+            <span class="score-value" id="score-display">0</span>
+        </div>
+        <div class="score-box">
+            <span class="score-label">High Score</span>
+            <span class="score-value" id="high-score-display">0</span>
+        </div>
+    </div>
+
+    <!-- Main card -->
+    <div class="card">
+        <span class="card-corner tl">✦</span>
+        <span class="card-corner br">✦</span>
+
+        <!-- Screen: Difficulty selection -->
+        <div id="screen-difficulty" class="screen active">
+            <p class="diff-title">Choose Your Expedition</p>
+            <p class="hint">
+                Answer in numbers are preferred.<br>
+                E.g. "20" is better than "twenty" — yet both are acceptable.
+            </p>
+            <div class="diff-grid">
+                <button class="diff-btn" onclick="startGame('e')">
+                    Easy
+                    <small>Warm up</small>
+                </button>
+                <button class="diff-btn" onclick="startGame('m')">
+                    Medium
+                    <small>Challenge</small>
+                </button>
+                <button class="diff-btn" onclick="startGame('d')">
+                    Difficult
+                    <small>Expert</small>
+                </button>
+            </div>
+        </div>
+
+        <!-- Screen: Question -->
+        <div id="screen-question" class="screen">
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+            </div>
+            <p class="q-counter" id="q-counter">Question 1 / 10</p>
+            <p class="question-text" id="question-text">Loading...</p>
+            <input type="text" class="answer-input" id="answer-input" placeholder="Your answer..." autocomplete="off" />
+            <button class="submit-btn" id="submit-btn" onclick="submitAnswer()">Submit Answer</button>
+            <div class="feedback" id="feedback"></div>
+        </div>
+
+        <!-- Screen: Round over -->
+        <div id="screen-roundover" class="screen">
+            <p class="round-title">Expedition Complete</p>
+            <div class="round-score-big" id="final-score">0</div>
+            <p class="round-sub">out of 10 questions</p>
+            <p class="new-best" id="new-best" style="display:none">★ New High Score! ★</p>
+            <div class="btn-row">
+                <button class="btn-secondary" onclick="startGame(currentDifficulty)">Play Again</button>
+                <button class="btn-secondary" onclick="goToDifficulty()">Change Difficulty</button>
+            </div>
+        </div>
+
+        <!-- Screen: No questions left -->
+        <div id="screen-noquestions" class="screen">
+            <p class="no-q-msg">You've answered all available questions<br>for this difficulty!</p>
+            <div class="btn-row">
+                <button class="submit-btn" style="grid-column:1/-1" onclick="resetBank()">Reset Question Bank</button>
+            </div>
+            <div style="margin-top:0.8rem">
+                <button class="btn-secondary" style="width:100%" onclick="goToDifficulty()">Change Difficulty</button>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="screen-loading" class="screen">
+            <p class="loading">Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></p>
+        </div>
+    </div>
+
+    <footer>MapDash · Quiz Game · Made with Flask · <a href="https://github.com/Derin-Suer/MapDash"
+            target="_blank">Github</a></footer>
+
+    <script src="/static/config.json" id="config"></script>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

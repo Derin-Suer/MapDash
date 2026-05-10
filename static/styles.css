@@ -1,0 +1,434 @@
+:root {
+    --ink: #1a1209;
+    --parchment: #f5eed8;
+    --aged: #e8d9b0;
+    --rust: #b94a1c;
+    --teal: #1d6a6a;
+    --gold: #c8943a;
+    --faded: #8a7a5a;
+    --correct: #2d7a4f;
+    --wrong: #b94a1c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--parchment);
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(139, 114, 60, 0.07) 28px, rgba(139, 114, 60, 0.07) 29px),
+        repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(139, 114, 60, 0.07) 28px, rgba(139, 114, 60, 0.07) 29px);
+    font-family: 'DM Mono', monospace;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 4rem;
+}
+
+/* ── HEADER ── */
+header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.compass-rose {
+    font-size: 2.2rem;
+    display: block;
+    animation: spin-slow 30s linear infinite;
+    margin-bottom: 0.3rem;
+    color: var(--rust);
+}
+
+@keyframes spin-slow {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--ink);
+    line-height: 1;
+}
+
+h1 span {
+    color: var(--rust);
+}
+
+.tagline {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--faded);
+    margin-top: 0.4rem;
+}
+
+/* ── SCOREBOARD ── */
+.scoreboard {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.score-box {
+    background: var(--aged);
+    border: 1.5px solid var(--gold);
+    padding: 0.6rem 1.4rem;
+    text-align: center;
+    position: relative;
+}
+
+.score-box::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid rgba(200, 148, 58, 0.3);
+    pointer-events: none;
+}
+
+.score-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faded);
+    display: block;
+}
+
+.score-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--rust);
+    line-height: 1.1;
+}
+
+/* ── CARD ── */
+.card {
+    background: #faf4e1;
+    border: 2px solid var(--ink);
+    padding: 2rem 2.2rem;
+    width: 100%;
+    max-width: 560px;
+    position: relative;
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: opacity 0.25s;
+}
+
+.card-corner {
+    position: absolute;
+    font-size: 0.65rem;
+    color: var(--faded);
+    font-family: 'DM Mono', monospace;
+}
+
+.card-corner.tl {
+    top: 8px;
+    left: 12px;
+}
+
+.card-corner.br {
+    bottom: 8px;
+    right: 12px;
+}
+
+/* ── SCREENS ── */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Difficulty select */
+.diff-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+    text-align: center;
+}
+
+.diff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+}
+
+.diff-btn {
+    background: transparent;
+    border: 2px solid var(--ink);
+    padding: 1rem 0.6rem;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+    text-align: center;
+}
+
+.diff-btn:hover {
+    background: var(--ink);
+    color: var(--parchment);
+    transform: translate(-2px, -2px);
+}
+
+.diff-btn small {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    margin-top: 3px;
+    color: var(--faded);
+}
+
+.diff-btn:hover small {
+    color: var(--aged);
+}
+
+/* Question screen */
+.progress-bar-wrap {
+    background: var(--aged);
+    height: 6px;
+    margin-bottom: 1.6rem;
+    border: 1px solid var(--gold);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--rust);
+    transition: width 0.4s ease;
+}
+
+.q-counter {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faded);
+    margin-bottom: 0.8rem;
+}
+
+.question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.45;
+    margin-bottom: 1.4rem;
+    min-height: 3.5rem;
+}
+
+.answer-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--ink);
+    padding: 0.5rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 1.2rem;
+    transition: border-color 0.2s;
+}
+
+.answer-input:focus {
+    border-color: var(--teal);
+}
+
+.answer-input::placeholder {
+    color: var(--faded);
+}
+
+.submit-btn {
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    padding: 0.7rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: block;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background: var(--rust);
+    transform: translate(-2px, -2px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Feedback banner */
+.feedback {
+    margin-top: 1rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    display: none;
+    font-family: 'DM Mono', monospace;
+}
+
+.feedback.correct {
+    background: rgba(45, 122, 79, 0.12);
+    border-left: 3px solid var(--correct);
+    color: var(--correct);
+}
+
+.feedback.wrong {
+    background: rgba(185, 74, 28, 0.1);
+    border-left: 3px solid var(--wrong);
+    color: var(--wrong);
+}
+
+.feedback.visible {
+    display: block;
+}
+
+/* Round over */
+.round-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 0.4rem;
+}
+
+.round-score-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: var(--rust);
+    text-align: center;
+    line-height: 1;
+    margin: 0.5rem 0;
+}
+
+.round-sub {
+    text-align: center;
+    color: var(--faded);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+}
+
+.new-best {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--ink);
+    padding: 0.65rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--ink);
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+
+.btn-secondary:hover {
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+    transform: translate(-2px, -2px);
+}
+
+/* No-questions screen */
+.no-q-msg {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 1.4rem;
+    line-height: 1.5;
+}
+
+/* Loading dots */
+.loading {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: var(--faded);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+}
+
+.dot {
+    animation: blink 1.2s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0
+    }
+
+    40% {
+        opacity: 1
+    }
+}
+
+/* Hint line */
+.hint {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--faded);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.6rem;
+    line-height: 1.6;
+}
+
+footer {
+    margin-top: 3rem;
+    font-size: 0.62rem;
+    color: var(--faded);
+    letter-spacing: 0.15em;
+    text-align: center;
+}
+
+footer a {
+    color: var(--faded);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
