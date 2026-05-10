@@ -18,7 +18,7 @@
     <header>
         <span class="compass-rose">✦</span>
         <h1>Map<span>Dash</span></h1>
-        <p class="tagline">Geography &amp; Knowledge Quiz</p>
+        <p class="tagline">Geography, History &amp; Knowledge Quiz</p>
     </header>
 
     <!-- Scoreboard -->
@@ -35,8 +35,8 @@
 
     <!-- Main card -->
     <div class="card">
-        <span class="card-corner tl">All in</span>
-        <span class="card-corner br">Pure Game</span>
+        <span class="card-corner tl">✦</span>
+        <span class="card-corner br">✦</span>
 
         <!-- Screen: Difficulty selection -->
         <div id="screen-difficulty" class="screen active">
@@ -80,7 +80,7 @@
             <p class="round-sub">out of 10 questions</p>
             <p class="new-best" id="new-best" style="display:none">★ New High Score! ★</p>
             <div class="btn-row">
-                <button class="btn-secondary" onclick="goToDifficulty()">Play Again</button>
+                <button class="btn-secondary" onclick="startGame(currentDifficulty)">Play Again</button>
                 <button class="btn-secondary" onclick="goToDifficulty()">Change Difficulty</button>
             </div>
         </div>
@@ -102,7 +102,8 @@
         </div>
     </div>
 
-    <footer>MapDash · Quiz Game · Made with Flask</footer>
+    <footer>MapDash · Quiz Game · Made with Flask · <a href="https://github.com/Derin-Suer/MapDash"
+            target="_blank">Github</a></footer>
 
     <script src="/static/config.json" id="config"></script>
     <script src="/static/script.js"></script>

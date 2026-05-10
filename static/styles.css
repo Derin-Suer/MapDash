@@ -425,3 +425,10 @@ footer {
     letter-spacing: 0.15em;
     text-align: center;
 }
+
+footer a {
+    color: var(--faded);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}

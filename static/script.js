@@ -1,5 +1,6 @@
 
 let waitingForNext = false;
+let currentDifficulty = null;
 
 function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -14,6 +15,7 @@ async function fetchState() {
 }
 
 async function startGame(difficulty) {
+    currentDifficulty = difficulty;
     showScreen('loading');
     const res = await fetch('/api/start', {
         method: 'POST',
@@ -52,6 +54,7 @@ async function loadQuestion() {
 
     showScreen('question');
     document.getElementById('answer-input').focus();
+
 }
 
 async function submitAnswer() {

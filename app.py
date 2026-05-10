@@ -6,8 +6,12 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24) 
 
-DB_PATH = 'questions.db'
+
 QUESTIONS_PER_ROUND = 10
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH  = os.path.join(BASE_DIR, "questions.db")
+
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
@@ -155,4 +159,8 @@ def get_state():
  
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(
+        debug=False,
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
