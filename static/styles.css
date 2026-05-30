@@ -432,3 +432,27 @@ footer a {
     border-bottom: 1px solid transparent;
     transition: border-color 0.15s;
 }
+
+.q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.restart-btn {
+    background: none;
+    border: 1px solid currentColor;
+    color: inherit;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+}
+
+.restart-btn:hover {
+    opacity: 1;
+}

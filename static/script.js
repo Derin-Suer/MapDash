@@ -127,6 +127,20 @@ function goToDifficulty() {
     showScreen('difficulty');
 }
 
+async function restartGame() {
+    if (!confirm('Restart and go back to main menu? Your current score will be lost.')) return;
+    await fetch('/api/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ difficulty: currentDifficulty })
+    });
+    document.getElementById('submit-btn').textContent = 'Submit Answer';
+    waitingForNext = false;
+    fetchState();          // reloads score + high score from server
+    document.getElementById('score-display').textContent = '0';
+    showScreen('difficulty');
+}
+
 // Press Enter to submit
 document.getElementById('answer-input').addEventListener('keydown', e => {
     if (e.key === 'Enter') submitAnswer();
