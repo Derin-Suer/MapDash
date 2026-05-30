@@ -60,6 +60,7 @@ async function loadQuestion() {
 async function submitAnswer() {
     if (waitingForNext) {
         await loadQuestion();
+        document.getElementById('submit-btn').textContent = 'Submit Answer →';
         return;
     }
 
